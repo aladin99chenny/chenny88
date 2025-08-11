@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daftar Sekarang Dan Claim Bonus Anda !</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { --gold-light:#ffe9a9; --gold:#f5c451; --gold-dark:#c79a2c; }
+    html,body{height:100%}
+    body{ background: radial-gradient(circle at top left, var(--gold-light), var(--gold-dark) 70%), var(--gold); overflow-x:hidden; }
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .floating{ animation:float 6s ease-in-out infinite }
+    .coin,.chip,.card{ position:absolute }
+    .card-tile{ width:80px; height:110px; border-radius:10px; background:#fff; box-shadow:0 8px 20px rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; font:700 2rem/1 serif }
+    .chip svg,.coin svg{ display:block }
+    .character { position:absolute; opacity:0.38; z-index:2; filter: drop-shadow(0 8px 18px rgba(0,0,0,.35)); pointer-events:none; }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 text-black relative">
+
+  <!-- Stylized Characters in Background -->
+  <svg class="character" style="top:5%;left:5%;width:240px;height:auto;" viewBox="0 0 200 300">
+    <!-- Zeus -->
+    <circle cx="100" cy="80" r="40" fill="#fff" stroke="#8a8a8a" stroke-width="5"/>
+    <path d="M60 150 L140 150 L120 280 L80 280 Z" fill="#ffd700" stroke="#b8860b" stroke-width="4"/>
+    <line x1="100" y1="0" x2="100" y2="60" stroke="#ffd700" stroke-width="8"/>
+    <polyline points="80,40 100,0 120,40" fill="none" stroke="#ffd700" stroke-width="5"/>
+    <polyline points="100,160 80,200 120,200 100,240" fill="none" stroke="#87ceeb" stroke-width="6"/>
+  </svg>
+
+  <svg class="character" style="top:10%;right:10%;width:240px;height:auto;" viewBox="0 0 200 300">
+    <!-- Starlight Princess -->
+    <circle cx="100" cy="60" r="35" fill="#ffe4e1" stroke="#d63384" stroke-width="4"/>
+    <path d="M60 120 L140 120 L160 260 L40 260 Z" fill="#add8e6" stroke="#00008b" stroke-width="3"/>
+    <polygon points="100,0 110,30 140,35 115,55 120,85 100,70 80,85 85,55 60,35 90,30" fill="#ffd700" stroke="#daa520" stroke-width="2"/>
+    <path d="M40 140 Q10 180 40 220" stroke="#fff" stroke-width="6" fill="none"/>
+    <path d="M160 140 Q190 180 160 220" stroke="#fff" stroke-width="6" fill="none"/>
+  </svg>
+
+  <svg class="character" style="bottom:5%;left:40%;width:260px;height:auto;" viewBox="0 0 200 300">
+    <!-- Gatot Kaca -->
+    <circle cx="100" cy="60" r="35" fill="#f5deb3" stroke="#7a3f10" stroke-width="4"/>
+    <path d="M60 120 L140 120 L160 260 L40 260 Z" fill="#daa520" stroke="#8b4513" stroke-width="3"/>
+    <polygon points="100,0 120,40 100,60 80,40" fill="#ffd700" stroke="#8b4513" stroke-width="2"/>
+    <path d="M60 140 L30 200 L60 200 Z" fill="#4682b4"/>
+    <path d="M140 140 L170 200 L140 200 Z" fill="#4682b4"/>
+  </svg>
+
+  <!-- Coins -->
+  <template id="coin-template">
+    <svg width="70" height="70" viewBox="0 0 100 100">
+      <defs>
+        <radialGradient id="goldGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff2c7"/>
+          <stop offset="50%" stop-color="#f5c451"/>
+          <stop offset="100%" stop-color="#c79a2c"/>
+        </radialGradient>
+      </defs>
+      <circle cx="50" cy="50" r="45" fill="url(#goldGrad)" stroke="#9a771e" stroke-width="4"/>
+      <circle cx="50" cy="50" r="30" fill="none" stroke="#9a771e" stroke-width="3"/>
+    </svg>
+  </template>
+  <template id="chip-template">
+    <svg width="66" height="66" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="45" fill="#fff" stroke="#c79a2c" stroke-width="10"/>
+      <g fill="#f5c451">
+        <rect x="12" y="47" width="16" height="6" rx="3"/>
+        <rect x="72" y="47" width="16" height="6" rx="3"/>
+        <rect x="47" y="12" width="6" height="16" rx="3"/>
+        <rect x="47" y="72" width="6" height="16" rx="3"/>
+      </g>
+      <circle cx="50" cy="50" r="24" fill="#f5c451"/>
+      <text x="50%" y="56%" text-anchor="middle" fill="#000" font-size="20" font-weight="bold">$</text>
+    </svg>
+  </template>
+
+  <script>
+    const container=document.body;function rand(n){return Math.random()*n}
+    function addMany(cls,tplId,count){for(let i=0;i<count;i++){const d=document.createElement('div');d.className=cls+' floating';d.style.top=rand(90)+'%';d.style.left=rand(90)+'%';d.style.animationDelay=(-rand(6))+'s';d.style.zIndex=1;d.innerHTML=document.getElementById(tplId).innerHTML;container.appendChild(d);}}
+    addMany('coin','coin-template',15);
+    addMany('chip','chip-template',8);
+  </script>
+
+  <!-- Content Card -->
+  <div class="bg-white/90 backdrop-blur-sm p-6 rounded-2xl max-w-xl w-full shadow-2xl text-center relative z-10">
+    <h1 class="text-2xl sm:text-3xl font-extrabold mb-6 text-[color:var(--gold-dark)] drop-shadow">Daftar Sekarang Dan Claim Bonus Anda !</h1>
+
+    <a href="https://t.me/tigerluckyadmin" class="flex items-center justify-center gap-3 bg-[color:var(--gold)] text-black px-5 py-4 rounded-2xl text-lg font-semibold mb-4 hover:brightness-110 shadow-lg ring-1 ring-[color:var(--gold-dark)]">
+      <span class="inline-flex items-center justify-center h-7 w-7 rounded-full bg-black/15">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="h-5 w-5" aria-hidden="true">
+          <circle cx="120" cy="120" r="120" fill="#111" fill-opacity="0.25"/>
+          <path d="M190.5 59.9 168 162.7c-1.8 7.7-6.4 9.4-12.9 5.8l-35.7-26.2-17.2 16.4c-1.8 1.8-3.3 3.2-6.9 3.2l2.5-35.6 65-59.1c3-2.4-.6-4-4.3-1.5l-80.5 50.6-33-10.4c-7.3-2.3-7.5-7.3 1.5-10.7l129-50.1c6.1-2.7 11.5 1.5 7.4 27.9z" fill="#000"/>
+        </svg>
+      </span>
+      Claim RM5 Percuma Sekarang !
+    </a>
+
+    <a href="https://t.me/tigerlucky08" class="flex items-center justify-center gap-3 bg-transparent text-black ring-1 ring-[color:var(--gold-dark)] px-5 py-4 rounded-2xl text-base font-semibold hover:bg-black/5">
+      <span class="inline-flex items-center justify-center h-6 w-6 rounded-full" style="background:#26A5E4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="h-4 w-4" aria-hidden="true">
+          <path d="M190.5 59.9 168 162.7c-1.8 7.7-6.4 9.4-12.9 5.8l-35.7-26.2-17.2 16.4c-1.8 1.8-3.3 3.2-6.9 3.2l2.5-35.6 65-59.1c3-2.4-.6-4-4.3-1.5l-80.5 50.6-33-10.4c-7.3-2.3-7.5-7.3 1.5-10.7l129-50.1c6.1-2.7 11.5 1.5 7.4 27.9z" fill="#ffffff"/>
+        </svg>
+      </span>
+      Join Telegram Channel For Feedback & Win Update !
+    </a>
+
+    <p class="mt-6 text-xs text-black/70">© <span id="year"></span> Your Brand</p>
+  </div>
+
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
